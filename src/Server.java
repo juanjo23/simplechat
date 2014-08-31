@@ -1,6 +1,5 @@
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,7 +23,7 @@ public class Server implements Runnable {
 			socket = serverSocket.accept();
 			oOut = new ObjectOutputStream(socket.getOutputStream());
 			oIn  = new ObjectInputStream(socket.getInputStream());			
-			
+			areachat.append("Conexión exitosa");
 		}catch(Exception e){
 			
 		}
@@ -49,6 +48,8 @@ public class Server implements Runnable {
 	}
 	public void closeServer(){
 		try{
+			oIn.close();
+			oOut.close();
 			socket.close();
 			serverSocket.close();
 		}catch(Exception e){ }

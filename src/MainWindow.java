@@ -16,6 +16,7 @@ import javax.swing.JToolBar;
 
 
 public class MainWindow extends JFrame implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	private JTextArea areaChat;
 	private JTextField  txtSend;
 	private JButton btnSend;
@@ -89,8 +90,13 @@ public class MainWindow extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnServer){
-			areaChat.append("Servidor creado con éxito");
+			Thread t = new Thread(new Server(areaChat));
+			t.start();
+		}else if(e.getSource() == btnClient){
+			Thread t = new Thread(new Client(areaChat));
+			t.start();
 		}
+		
 		
 	}	
 }
